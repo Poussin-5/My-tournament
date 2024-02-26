@@ -8,6 +8,7 @@ import Header from '../src/components/header'
 //import reportWebVitals from '../src/components/header'
 import Tournament from './pages/tournament/tournament'
 import CreateTournament from './pages/tournament/createTournament/createTournament'
+import SigninForm from './components/form/sigin-form/signinForm'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
@@ -19,6 +20,7 @@ root.render(
         <Route path="*" element={<Error />} />
         <Route path="/tournament" element={<Tournament />} />
         <Route path="/new-tournament" element={<CreateTournament />} />
+        <Route path="/login" element={<SigninForm />} />
       </Routes>
     </Router>
   </React.StrictMode>

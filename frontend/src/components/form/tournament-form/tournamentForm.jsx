@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { addTournament } from '../../../lib/functions'
 
-function TournamentForm(tournament, validate) {
+function TournamentForm() {
   const [genre, setGenre] = useState('')
   const onOptionChange = (e) => {
     setGenre(e.target.value)
