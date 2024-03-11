@@ -12,6 +12,7 @@ export async function addTournament(data) {
   for (let courtNumber of courtsNumberSplit) {
     courtsNumber.push(courtNumber)
   }
+
   const tournament = {
     userId: userId,
     name: data.name,
@@ -44,7 +45,7 @@ export async function addTournament(data) {
   }
 }
 
-export async function login(data) {
+export async function signup(data) {
   const user = {
     email: data.email,
     password: data.password,
@@ -53,17 +54,60 @@ export async function login(data) {
   try {
     const response = await axios({
       method: 'POST',
-      url: 'http://localhost:4000/api/auth/login',
+      url: 'http://localhost:4000/api/auth/signup',
       headers: { 'content-type': 'application/json' },
       data: JSON.stringify(user),
     })
-    if (!response?.data?.token) {
-      console.log('Something went wrong during signing in: ', response)
+    if (!response) {
+      console.log('Something went wrong during signup in: ', response)
     } else {
-      storeInLocalStorage(response.data.token, response.data.userId)
+      alert('Vous avez bien créé votre compte')
     }
   } catch (err) {
     console.log(err)
     return { error: true, message: err.message }
+  }
+}
+
+function formatTournaments(tournamentArray) {
+  return tournamentArray.map((tournament) => {
+    const newTournament = { ...tournament }
+    // eslint-disable-next-line no-underscore-dangle
+    newTournament.id = newTournament._id
+    return newTournament
+  })
+}
+
+export async function getTournaments() {
+  try {
+    const response = await axios({
+      method: 'GET',
+      url: `http://localhost:4000/api/tournaments`,
+    })
+    // eslint-disable-next-line array-callback-return
+    const tournaments = formatTournaments(response.data)
+    return tournaments
+  } catch (err) {
+    console.error(err)
+    return []
+  }
+}
+
+export function getFromLocalStorage(item) {
+  return localStorage.getItem(item)
+}
+
+export async function getAuthenticatedUser() {
+  const defaultReturnObject = { authenticated: false, user: null }
+  try {
+    const token = getFromLocalStorage('token')
+    const userId = getFromLocalStorage('userId')
+    if (!token) {
+      return defaultReturnObject
+    }
+    return { authenticated: true, user: { userId, token } }
+  } catch (err) {
+    console.error('getAuthenticatedUser, Something Went Wrong', err)
+    return defaultReturnObject
   }
 }

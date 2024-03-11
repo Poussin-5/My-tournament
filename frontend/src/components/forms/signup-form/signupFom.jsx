@@ -1,23 +1,24 @@
 import { useForm } from 'react-hook-form'
-import { login } from '../../../lib/functions'
+import { signup } from '../../../lib/functions'
 
-function SigninForm() {
+function SignupForm() {
   const {
     register,
     formState: { errors },
-    // reset,
+    reset,
     handleSubmit,
   } = useForm()
 
   const onSubmit = async (data, e) => {
-    login(data)
+    signup(data)
     console.log(data)
+    reset()
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="div-form-sigin">
-        <h2>Se connecter</h2>
+        <h2>Créer votre compte</h2>
         <label htmlFor="email">Identifiant</label>
         <input name="email" id="email" type="text" {...register('email')} />
         {errors.id && <span>{errors.id.message}</span>}
@@ -36,4 +37,4 @@ function SigninForm() {
   )
 }
 
-export default SigninForm
+export default SignupForm

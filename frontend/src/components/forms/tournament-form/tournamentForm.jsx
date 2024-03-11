@@ -11,13 +11,14 @@ function TournamentForm() {
   const {
     register,
     formState: { errors },
-    // reset,
+    reset,
     handleSubmit,
   } = useForm()
 
   const onSubmit = async (data, e) => {
     addTournament(data)
     console.log(data)
+    reset()
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -53,9 +54,9 @@ function TournamentForm() {
           <input
             name="genre"
             type="radio"
-            value="male"
+            value="masculin"
             id="male"
-            checked={genre === 'male'}
+            checked={genre === 'masculin'}
             onClick={onOptionChange}
             {...register('genre', {
               required: 'Vous devez rensiegner un type de tournois',
@@ -65,9 +66,9 @@ function TournamentForm() {
           <input
             name="genre"
             type="radio"
-            value="female"
+            value="féminin"
             id="female"
-            checked={genre === 'female'}
+            checked={genre === 'féminin'}
             onClick={onOptionChange}
             {...register('genre', {
               required: 'Vous devez rensiegner un type de tournois',
@@ -86,6 +87,18 @@ function TournamentForm() {
             })}
           />
           <label htmlFor="mixte">Mixte</label>
+          <input
+            name="genre"
+            type="radio"
+            value="open"
+            id="open"
+            checked={genre === 'open'}
+            onClick={onOptionChange}
+            {...register('genre', {
+              required: 'Vous devez rensiegner un type de tournois',
+            })}
+          />
+          <label htmlFor="mixte">Open</label>
         </p>
         {errors.genre && <span>{errors.genre.message}</span>}
 

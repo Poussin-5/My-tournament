@@ -1,4 +1,4 @@
-import TournamentForm from '../../../components/form/tournament-form/tournamentForm'
+import TournamentForm from '../../../components/forms/tournament-form/tournamentForm'
 
 function CreateTournament() {
   return <TournamentForm />
