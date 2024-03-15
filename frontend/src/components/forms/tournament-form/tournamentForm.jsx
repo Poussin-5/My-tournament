@@ -23,7 +23,22 @@ function TournamentForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="div-form-tournament">
-        <h2>Crée mon tournois</h2>
+        <h2>Créer mon tournoi</h2>
+        <label htmlFor="selectedSport">Selectionner le sport:</label>
+        <select
+          name="selectedSport"
+          {...register('sport', {
+            required: 'Vous devez selcetionner un sport',
+          })}
+        >
+          <option value="Volley">Volley</option>
+          <option value="Football">Football</option>
+          <option value="Rugby">Rugby</option>
+          <option value="Pétanque">Pétanque</option>
+          <option value="Biière-Pong">Biière-Pong</option>
+          <option value="Fléchette">Fléchette</option>
+        </select>
+        {errors.selectedSport && <span>{errors.selectedSport.message}</span>}
 
         <label htmlFor="name">Nom du tournois</label>
         <input
@@ -34,11 +49,25 @@ function TournamentForm() {
         />
         {errors.name && <span>{errors.name.message}</span>}
 
-        <label htmlFor="file">Affiche du tournois</label>
+        <label htmlFor="selectedType">
+          Selectionner le type d'evennement :
+        </label>
+        <select
+          name="selectedType"
+          {...register('typeEvent', {
+            required: 'Vous devez selcetionner une option',
+          })}
+        >
+          <option value="Publique">Publique</option>
+          <option value="Privée">Privée</option>
+        </select>
+        {errors.selectedType && <span>{errors.selectedType.message}</span>}
+
+        <label htmlFor="file">Affiche du tournoi</label>
         <input name="file" id="file" type="file" {...register('file')} />
         {errors.file && <span>{errors.file.message}</span>}
 
-        <label htmlFor="date">Date du tournois</label>
+        <label htmlFor="date">Date du tournoi</label>
         <input
           name="date"
           id="date"
@@ -107,6 +136,7 @@ function TournamentForm() {
           name="minTeam"
           id="minTeam"
           type="number"
+          min="0"
           {...register('minTeam', {
             required: "Vous devez renseigner un nombre minimale d'équipe",
           })}
@@ -118,6 +148,7 @@ function TournamentForm() {
           name="maxTeam"
           id="maxTeam"
           type="number"
+          min="0"
           {...register('maxTeam', {
             required: "Vous devez renseigner un nombre maximale d'équipe",
           })}
@@ -133,7 +164,27 @@ function TournamentForm() {
           {...register('courtsNumber')}
         />
 
-        <label htmlFor="comment">Commentaire infos complémentaire</label>
+        <label htmlFor="mailContact">Contact mail</label>
+        <input
+          name="mailContact"
+          id="mailContact"
+          type="textarrea"
+          placeholder="mail"
+          {...register('mailContact')}
+        />
+
+        <label htmlFor="phoneContact">Contact téléphone</label>
+        <input
+          name="phoneContact"
+          id="phoneContact"
+          type="textarrea"
+          placeholder="0000000000"
+          {...register('phoneContact')}
+        />
+
+        <label htmlFor="comment">
+          Commentaire et informations complémentaires
+        </label>
         <input
           name="comment"
           id="comment"

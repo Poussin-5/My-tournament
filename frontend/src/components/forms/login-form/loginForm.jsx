@@ -25,7 +25,6 @@ function LoginForm({ setUser }) {
       if (!response?.data?.token) {
         console.log('Something went wrong during signing in: ', response)
       } else {
-        alert('Vous êtes connecté')
         setUser(response.data)
         storeInLocalStorage(response.data.token, response.data.userId)
         navigate('/')

@@ -24,8 +24,12 @@ function TournamentCard({ tournament, size }) {
         <img src={tournament.imageUrl} alt={tournament.name} />
         <div>
           {title}
+          <p>{tournament.eventType}</p>
           <p>date : {date}</p>
           <p>type : {tournament.genre}</p>
+          <p>{tournament.sport}</p>
+          <p> contact par mail: {tournament.mailContact}</p>
+          <p> contact par téléphone: {tournament.phoneContact}</p>
           <p> {tournament.comment}</p>
         </div>
       </article>
@@ -41,6 +45,7 @@ TournamentCard.propTypes = {
     name: PropTypes.string,
     date: PropTypes.string,
     genre: PropTypes.string,
+    conatct: PropTypes.string,
     comment: PropTypes.string,
     courtsNumber: PropTypes.arrayOf(PropTypes.number),
     maxTeam: PropTypes.number,

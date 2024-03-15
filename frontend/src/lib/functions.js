@@ -16,11 +16,14 @@ export async function addTournament(data) {
   const tournament = {
     userId: userId,
     name: data.name,
+    sport: data.sport,
     date: data.date,
     genre: data.genre,
     minTeam: data.minTeam,
     maxTeam: data.maxTeam,
     courtsNumber: courtsNumber,
+    mailContact: data.mailContact,
+    phoneContact: data.phoneContact,
     comment: data.comment,
   }
 

@@ -23,7 +23,7 @@ function Header({ user, setUser }) {
             to="/nouveau-tournois"
             className={`${pathname === '/nouveau-tournois' ? 'activ' : null}`}
           >
-            Créer mon tournois
+            Créer mon tournoi
           </Link>
         </li>
         <li>

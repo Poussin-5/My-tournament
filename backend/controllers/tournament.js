@@ -18,6 +18,18 @@ exports.createTournament = async (req, res, next) => {
   if (req.file) {
     const filetypes = /jpeg|jpg|png|gif/
     const isValid = filetypes.test(req.file.mimetype)
+    const tournamentObject = JSON.parse(req.body.tournament)
+    if (tournamentObject.minTeam < 0) {
+      return res.status(400).json({
+        message: 'Vous ne pouvez pas entrer de chiffre négatif ',
+      })
+    }
+    if (tournamentObject.maxTeam - tournamentObject.minTeam < 0) {
+      return res.status(400).json({
+        message:
+          "Le nombre maximum d'équipe doit être supérieur ou égale au nombre minimum",
+      })
+    }
     if (!isValid) {
       return res.status(400).json({ message: "ceci n'est pas une image!" })
     } else {
@@ -26,7 +38,6 @@ exports.createTournament = async (req, res, next) => {
         .resize({ heigth: 200, width: 200 })
         .toFile(compressName)
 
-      const tournamentObject = JSON.parse(req.body.tournament)
       delete tournamentObject._id
       delete tournamentObject._userId
 
