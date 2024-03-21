@@ -114,3 +114,14 @@ export async function getAuthenticatedUser() {
     return defaultReturnObject
   }
 }
+
+export function sortArrayDate(array) {
+  array.sort(function (x, y) {
+    var firstDate = new Date(x.date),
+      SecondDate = new Date(y.date)
+
+    if (firstDate < SecondDate) return -1
+    if (firstDate > SecondDate) return 1
+    return 0
+  })
+}

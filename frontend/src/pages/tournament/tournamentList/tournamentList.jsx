@@ -3,11 +3,12 @@
 import { Link } from 'react-router-dom'
 import TournamentItem from '../../../components/tournament/tournamentCard/tournamentCard'
 import { useState, useEffect } from 'react'
-import { getTournaments } from '../../../lib/functions'
+import { getTournaments, sortArrayDate } from '../../../lib/functions'
 
 function TournamentList() {
   const [tournaments, setTournaments] = useState(null)
   const [loading, setLoading] = useState(true)
+
   const displayTournaments = () =>
     tournaments ? (
       tournaments.map((tournament) => (
@@ -23,6 +24,7 @@ function TournamentList() {
       if (data) {
         setTournaments(data)
         setLoading(false)
+        sortArrayDate(data)
       }
     }
     getTournamentsList()
